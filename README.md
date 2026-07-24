@@ -1,5 +1,7 @@
 # Loan Approval Prediction Model
 
+🚀 **[Access the Live Web Application here!](https://sathvikov.github.io/Loan-Approval/)**
+
 A complete Machine Learning classification project designed to predict loan approval decisions based on applicant demographics, financial information, and credit history. Developed as part of the Machine Learning Internship for **Chand Web Technology Private Limited**.
 
 ---

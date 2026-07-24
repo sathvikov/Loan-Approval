@@ -15,6 +15,13 @@ loan_approval_prediction/
 │   ├── preprocessing.py              # Cleaning and feature engineering
 │   ├── model.py                      # Model training, comparison, and serialization
 │   └── utils.py                      # Plotting and visualization utilities
+├── templates/
+│   └── index.html                    # Glassmorphism HTML frontend
+├── static/
+│   ├── css/
+│   │   └── style.css                 # Premium custom styles
+│   └── js/
+│       └── main.js                   # Form submission & circular gauge logic
 ├── models/
 │   └── best_loan_model.joblib        # Saved model pipeline (preprocessor, scaler, model)
 ├── reports/
@@ -23,6 +30,7 @@ loan_approval_prediction/
 │   ├── confusion_matrix.png          # Test set confusion matrix
 │   ├── roc_curve.png                 # ROC curve & AUC score
 │   └── feature_importance.png        # Relative importance of features
+├── app.py                            # Flask backend API server
 ├── main.py                           # End-to-end model pipeline runner
 ├── predict.py                        # Interactive prediction CLI
 ├── requirements.txt                  # Python dependencies
@@ -111,6 +119,16 @@ To run predictions interactively using the CLI:
 python predict.py
 ```
 The script will first output predictions for two pre-configured test profiles (high-approval vs low-approval), and then prompt you to enter details for a custom applicant to get immediate predictions!
+
+### 3. Open the Premium Web Application
+To run the underwriting dashboard in your web browser:
+```bash
+python app.py
+```
+Once the local server boots, open your browser and navigate to:
+**[http://127.0.0.1:5000](http://127.0.0.1:5000)**
+
+You will find a responsive, dark-theme layout with input range sliders and an animated gauge displaying approval probabilities in real time!
 
 ---
 

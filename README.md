@@ -140,3 +140,4 @@ You will find a responsive, dark-theme layout with input range sliders and an an
 - **`confusion_matrix.png`**: Displays true positives, true negatives, false positives, and false negatives of the selected model.
 - **`roc_curve.png`**: Evaluates the true-positive rate vs false-positive rate across decision thresholds, displaying the AUC score.
 - **`feature_importance.png`**: Shows the absolute coefficients of features, indicating their relative importance to the prediction.
+

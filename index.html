@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoanSentry // AI Loan Approval Predictor</title>
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS stylesheet link (relative path for GitHub Pages compatibility) -->
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+    <!-- Background visual gradient bubbles -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="app-container">
+        <!-- Dashboard Header -->
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-icon">✦</span>
+                <span class="logo-text">LOAN<span class="highlight">SENTRY</span></span>
+            </div>
+            <p class="subtitle">AI-Powered Underwriting & Credit Risk Analysis</p>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="dashboard-grid">
+            <!-- Left Panel: Application Form -->
+            <section class="panel glass form-panel">
+                <div class="panel-header">
+                    <h2>Applicant Profile</h2>
+                    <p>Enter financial and demographic details below</p>
+                </div>
+                
+                <form id="loanForm" autocomplete="off">
+                    <div class="form-grid">
+                        <!-- Gender -->
+                        <div class="form-group">
+                            <label for="Gender">Gender</label>
+                            <select id="Gender" name="Gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <!-- Married -->
+                        <div class="form-group">
+                            <label for="Married">Marital Status</label>
+                            <select id="Married" name="Married">
+                                <option value="Yes">Married</option>
+                                <option value="No">Single</option>
+                            </select>
+                        </div>
+
+                        <!-- Dependents -->
+                        <div class="form-group">
+                            <label for="Dependents">Dependents</label>
+                            <select id="Dependents" name="Dependents">
+                                <option value="0">0 Dependents</option>
+                                <option value="1">1 Dependent</option>
+                                <option value="2">2 Dependents</option>
+                                <option value="3+">3+ Dependents</option>
+                            </select>
+                        </div>
+
+                        <!-- Education -->
+                        <div class="form-group">
+                            <label for="Education">Education</label>
+                            <select id="Education" name="Education">
+                                <option value="Graduate">Graduate</option>
+                                <option value="Not Graduate">Undergraduate / Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Self Employed -->
+                        <div class="form-group">
+                            <label for="Self_Employed">Self Employed</label>
+                            <select id="Self_Employed" name="Self_Employed">
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+
+                        <!-- Property Area -->
+                        <div class="form-group">
+                            <label for="Property_Area">Property Location</label>
+                            <select id="Property_Area" name="Property_Area">
+                                <option value="Semiurban">Semiurban</option>
+                                <option value="Urban">Urban</option>
+                                <option value="Rural">Rural</option>
+                            </select>
+                        </div>
+
+                        <!-- Credit History -->
+                        <div class="form-group full-width">
+                            <label for="Credit_History">Credit History Status</label>
+                            <select id="Credit_History" name="Credit_History" class="credit-select">
+                                <option value="1.0">Meets Standard Credit Guidelines (Good Credit Score)</option>
+                                <option value="0.0">Does Not Meet Guidelines (Poor / No Credit Score)</option>
+                            </select>
+                        </div>
+
+                        <!-- Applicant Income -->
+                        <div class="form-group range-group">
+                            <div class="label-row">
+                                <label for="ApplicantIncome">Monthly Primary Income</label>
+                                <span class="range-val" id="ApplicantIncomeVal">$5,000</span>
+                            </div>
+                            <input type="range" id="ApplicantIncome" name="ApplicantIncome" min="1000" max="30000" step="250" value="5000">
+                        </div>
+
+                        <!-- Coapplicant Income -->
+                        <div class="form-group range-group">
+                            <div class="label-row">
+                                <label for="CoapplicantIncome">Co-applicant Income</label>
+                                <span class="range-val" id="CoapplicantIncomeVal">$0</span>
+                            </div>
+                            <input type="range" id="CoapplicantIncome" name="CoapplicantIncome" min="0" max="15000" step="250" value="0">
+                        </div>
+
+                        <!-- Loan Amount -->
+                        <div class="form-group range-group">
+                            <div class="label-row">
+                                <label for="LoanAmount">Requested Loan Amount</label>
+                                <span class="range-val" id="LoanAmountVal">$120,000</span>
+                            </div>
+                            <input type="range" id="LoanAmount" name="LoanAmount" min="10" max="700" step="5" value="120">
+                        </div>
+
+                        <!-- Loan Amount Term -->
+                        <div class="form-group range-group">
+                            <div class="label-row">
+                                <label for="Loan_Amount_Term">Repayment Term</label>
+                                <span class="range-val" id="Loan_Amount_TermVal">360 Days</span>
+                            </div>
+                            <input type="range" id="Loan_Amount_Term" name="Loan_Amount_Term" min="120" max="480" step="60" value="360">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                        <span>Analyze Application</span>
+                        <div class="glow-effect"></div>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Right Panel: Results View -->
+            <section class="panel glass results-panel" id="resultsView">
+                <!-- Initial State -->
+                <div class="state-container active" id="stateInitial">
+                    <div class="empty-state">
+                        <div class="radar-scan">
+                            <div class="circle"></div>
+                            <div class="scan-line"></div>
+                        </div>
+                        <h3>System Idle</h3>
+                        <p>Configure the applicant profile on the left and trigger analysis to review credit risk evaluation.</p>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div class="state-container" id="stateLoading">
+                    <div class="loader-content">
+                        <div class="spinner">
+                            <div class="ring"></div>
+                            <div class="ring"></div>
+                            <div class="ring"></div>
+                        </div>
+                        <h3>Executing AI Inference</h3>
+                        <p>Cleaning dataset features, running scaling parameters, and evaluating classifier thresholds...</p>
+                    </div>
+                </div>
+
+                <!-- Results State -->
+                <div class="state-container" id="stateResult">
+                    <div class="result-header">
+                        <h2>Underwriting Report</h2>
+                        <div id="statusBadge" class="status-badge">
+                            <span id="statusLabel">APPROVED</span>
+                        </div>
+                    </div>
+
+                    <!-- Visual Metrics row -->
+                    <div class="metrics-row">
+                        <!-- Radial Gauge -->
+                        <div class="gauge-card">
+                            <div class="radial-gauge">
+                                <svg width="160" height="160">
+                                    <circle class="bg" cx="80" cy="80" r="70"></circle>
+                                    <circle class="progress" cx="80" cy="80" r="70" id="gaugeCircle"></circle>
+                                </svg>
+                                <div class="gauge-center">
+                                    <span class="percentage" id="scorePercent">0%</span>
+                                    <span class="label">Probability</span>
+                                </div>
+                            </div>
+                            <p class="gauge-desc">Confidence score computed by the model pipeline</p>
+                        </div>
+                    </div>
+
+                    <!-- Additional Details -->
+                    <div class="detail-bars">
+                        <!-- Loan to Income Bar -->
+                        <div class="bar-group">
+                            <div class="bar-label-row">
+                                <span>Loan-to-Income Ratio</span>
+                                <span id="ratioLabel" class="highlight">0.0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="ratioFill"></div>
+                            </div>
+                            <span class="bar-note">Optimal range is below 40.0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Risk Analysis & Recommendation -->
+                    <div class="advice-section">
+                        <h3>Model Insights & Recommendations</h3>
+                        <ul class="advice-list" id="adviceList">
+                            <!-- Populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Client-side Javascript link (relative path for GitHub Pages compatibility) -->
+    <script src="./static/js/main.js"></script>
+</body>
+</html>
